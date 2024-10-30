@@ -45,17 +45,34 @@ void LED_Init(void) {
     GPIO_PORTF_DEN_R |= RED_LED | BLUE_LED | GREEN_LED;
 }
 
-void LED_Control(char color) {
+void LED_Control(char color) 
+{
     GPIO_PORTF_DATA_R &= ~(RED_LED | BLUE_LED | GREEN_LED); // Turn off all LEDs
 
-    if (color == 'R') {
+    if (color == 'R') 
+    {
         GPIO_PORTF_DATA_R |= RED_LED; // Turn on RED LED
-    } else if (color == 'B') {
+    } 
+    else if (color == 'B') 
+    {
         GPIO_PORTF_DATA_R |= BLUE_LED; // Turn on BLUE LED
-    } else if (color == 'G') {
+    } 
+    else if (color == 'G') 
+    {
         GPIO_PORTF_DATA_R |= GREEN_LED; // Turn on GREEN LED
     }
-
+    else if (color == 'r') 
+    {
+            GPIO_PORTF_DATA_R |= RED_LED; // Turn on RED LED
+        } 
+    else if (color == 'b') 
+    {
+        GPIO_PORTF_DATA_R |= BLUE_LED; // Turn on BLUE LED
+    } 
+    else if (color == 'g') 
+    {
+        GPIO_PORTF_DATA_R |= GREEN_LED; // Turn on GREEN LED
+    }
 }
 
 int main(void) {
