@@ -45,3 +45,32 @@ void LED_Init(void) {
     GPIO_PORTF_DEN_R |= RED_LED | BLUE_LED | GREEN_LED;
 }
 
+void LED_Control(char color) {
+    GPIO_PORTF_DATA_R &= ~(RED_LED | BLUE_LED | GREEN_LED); // Turn off all LEDs
+
+    if (color == 'R') {
+        GPIO_PORTF_DATA_R |= RED_LED; // Turn on RED LED
+    } else if (color == 'B') {
+        GPIO_PORTF_DATA_R |= BLUE_LED; // Turn on BLUE LED
+    } else if (color == 'G') {
+        GPIO_PORTF_DATA_R |= GREEN_LED; // Turn on GREEN LED
+    }
+
+}
+
+int main(void) {
+    UART0_Init();  // Initialize UART0
+    LED_Init();    // Initialize LEDs
+
+    while (1) {
+        char receivedChar = UART0_Read(); // Read character from UART
+
+        if (receivedChar) {                // If a character was received
+            UART0_Write(receivedChar);     // Echo back the character
+            LED_Control(receivedChar);     // Control LEDs based on received character
+        }
+    }
+}
+
+
+
